@@ -34,7 +34,7 @@ function Memo() {
         <div className="flex md:flex-col bg-white">
           <Hero {...{ id, company_id, logo_img_thumb, title_img_thumb }} />
           <div className="flex-1">
-            <Summary {...{ name, industry_name, position }} />
+            <Summary {...{ id, company_id, name, industry_name, position }} />
             <Features {...{ avg_day, avg_rate, like_count }} />
           </div>
         </div>
