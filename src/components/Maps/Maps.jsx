@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { useAtom } from 'jotai'
-import { useEffect } from 'react'
 import { fetchJobsAtom } from '../../atoms/job'
 import { handleMarkerAtom } from '../../atoms/marker'
 import { CLUSTER_SCALE } from './constants'
@@ -17,9 +16,15 @@ const { kakao } = window
 function Maps() {
   const [jobs] = useAtom(fetchJobsAtom)
   const [, handleMarker] = useAtom(handleMarkerAtom)
+  const customOverlay = useMemo(() => createCustomOverlay(), [])
+  const setCustomOverlay = useCallback(
+    (map) => {
+      customOverlay.setMap(map)
+    },
+    [customOverlay]
+  )
 
   useEffect(() => {
-    const customOverlay = createCustomOverlay()
     const map = createMap()
     const markers = () =>
       createMarkers(findJobsByBounds(jobs, map.getBounds()), {
@@ -35,7 +40,7 @@ function Maps() {
     })
 
     kakao.maps.event.addListener(map, 'idle', () => {
-      customOverlay.setMap(null)
+      setCustomOverlay(null)
 
       markerClusterer.clear()
       markerClusterer.addMarkers(markers())
@@ -45,11 +50,7 @@ function Maps() {
       })
     })
 
-    kakao.maps.event.addListener(markerClusterer, 'clusterover', (cluster) => {
-      if (map.getLevel() !== 2) {
-        return
-      }
-
+    kakao.maps.event.addListener(markerClusterer, 'clusterclick', (cluster) => {
       const markers = cluster.getMarkers()
 
       if (markers.length === 0) {
@@ -61,7 +62,7 @@ function Maps() {
       const point = new kakao.maps.Point(x, y + 35)
       const overlayPosition = projection.coordsFromPoint(point)
 
-      customOverlay.setMap(map)
+      setCustomOverlay(map)
       customOverlay.setPosition(overlayPosition)
 
       handleMarker({
@@ -70,9 +71,19 @@ function Maps() {
         ),
       })
     })
-  }, [])
+  }, [customOverlay])
 
-  return <div id="map" className="h-screen w-screen" />
+  return (
+    <div
+      id="map"
+      className="h-screen w-screen"
+      onClick={(e) => {
+        if (e.target.tagName === 'svg') {
+          setCustomOverlay(null)
+        }
+      }}
+    />
+  )
 }
 
 export default Maps

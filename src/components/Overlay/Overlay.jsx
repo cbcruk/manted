@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { useAtom } from 'jotai'
 import { handleMarkerAtom } from '../../atoms/marker'
@@ -6,6 +6,12 @@ import { handleMarkerAtom } from '../../atoms/marker'
 function Overlay() {
   const customOverlayElem = document.getElementById('custom-overlay')
   const [{ expanded }, handleMarker] = useAtom(handleMarkerAtom)
+  const squareWidth = useMemo(() => {
+    const root = Math.ceil(Math.sqrt(expanded.length))
+    const width = root * 30 + 4 * 2 + root * 4
+
+    return width
+  }, [expanded])
 
   if (expanded.length === 0) {
     return null
@@ -16,7 +22,12 @@ function Overlay() {
   }
 
   return createPortal(
-    <div className="-translate-x-2/4 -translate-y-1/4 absolute bg-white flex gap-1 p-1 rounded-3xl shadow-2xl transform border-2 border-dashed">
+    <div
+      className="-translate-x-2/4 -translate-y-1/4 absolute bg-white flex flex-wrap gap-1 p-1 rounded-3xl shadow-2xl transform border-2 border-dashed"
+      style={{
+        width: squareWidth,
+      }}
+    >
       {expanded.map((marker) => (
         <a
           key={marker.id}

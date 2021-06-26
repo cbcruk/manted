@@ -50,6 +50,7 @@ export function createMarkerClusterer(markers, options = {}) {
     averageCenter: true,
     minLevel: 2,
     gridSize: 30,
+    disableClickZoom: true,
     ...options,
   })
 
