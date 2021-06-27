@@ -29,7 +29,7 @@ function Memo() {
   } = selected
 
   return (
-    <div className="max-h-screen fixed inset-0 md:top-0 top-auto md:left-auto z-10 p-2">
+    <div className="max-h-screen fixed inset-0 md:top-0 top-auto md:bottom-auto md:left-auto z-10 p-2">
       <div className="md:w-72 md:max-h-full rounded-md md:overflow-auto overflow-hidden bg-white shadow-md">
         <div className="flex md:flex-col bg-white">
           <Hero {...{ id, company_id, logo_img_thumb, title_img_thumb }} />
