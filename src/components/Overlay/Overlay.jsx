@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { useAtom } from 'jotai'
+import sortBy from 'lodash/sortBy'
 import { handleMarkerAtom } from '../../atoms/marker'
 
 function Overlay() {
@@ -28,7 +29,7 @@ function Overlay() {
         width: squareWidth,
       }}
     >
-      {expanded.map((marker) => (
+      {sortBy(expanded, ['company_id']).map((marker) => (
         <a
           key={marker.id}
           className="block cursor-pointer"
