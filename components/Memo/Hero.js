@@ -1,8 +1,6 @@
-import React from 'react'
-
 function Hero({ title_img_thumb, id, logo_img_thumb, company_id }) {
   return (
-    <div className="relative max-w-30 md:max-w-full">
+    <div className="relative min-w-[120px] max-w-[120px] md:max-w-full">
       <img
         src={title_img_thumb}
         className="w-full h-full object-cover"

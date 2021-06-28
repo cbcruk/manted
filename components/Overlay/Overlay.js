@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { createPortal } from 'react-dom'
 import { useAtom } from 'jotai'
 import sortBy from 'lodash/sortBy'

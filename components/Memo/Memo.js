@@ -1,4 +1,3 @@
-import React from 'react'
 import { useAtom } from 'jotai'
 import { markerAtom } from '../../atoms/marker'
 import Hero from './Hero'
@@ -33,7 +32,7 @@ function Memo() {
       <div className="md:w-72 md:max-h-full rounded-md md:overflow-auto overflow-hidden bg-white shadow-md">
         <div className="flex md:flex-col bg-white">
           <Hero {...{ id, company_id, logo_img_thumb, title_img_thumb }} />
-          <div className="flex-1">
+          <div className="flex-1 overflow-hidden">
             <Summary {...{ id, company_id, name, industry_name, position }} />
             <Features {...{ avg_day, avg_rate, like_count }} />
           </div>

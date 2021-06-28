@@ -1,8 +1,7 @@
 import { DEFAULT_CENTER, DEFAULT_ZOOM_LEVEL } from './constants'
 
-const { kakao } = window
-
 export function createMap() {
+  const { kakao } = window
   const mapElem = document.getElementById('map')
   const map = new kakao.maps.Map(mapElem, {
     center: new kakao.maps.LatLng(DEFAULT_CENTER[0], DEFAULT_CENTER[1]),
@@ -15,6 +14,7 @@ export function createMap() {
 }
 
 export function createMarkers(items, { onClick }) {
+  const { kakao } = window
   const markers = items.map((item) => {
     const { lat, lng, name, logo_img_thumb } = item
     const marker = new kakao.maps.Marker({
@@ -46,6 +46,7 @@ export function createMarkers(items, { onClick }) {
 }
 
 export function createMarkerClusterer(markers, options = {}) {
+  const { kakao } = window
   const clusterer = new kakao.maps.MarkerClusterer({
     averageCenter: true,
     minLevel: 2,
@@ -62,6 +63,7 @@ export function createMarkerClusterer(markers, options = {}) {
 }
 
 export function createCustomOverlay() {
+  const { kakao } = window
   const customOverlay = new kakao.maps.CustomOverlay({
     content: '<div id="custom-overlay"></div>',
   })
@@ -70,6 +72,7 @@ export function createCustomOverlay() {
 }
 
 export function findJobsByBounds(jobs, bounds) {
+  const { kakao } = window
   return jobs.filter((job) => {
     const latlng = new kakao.maps.LatLng(job.lat, job.lng)
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { useAtom } from 'jotai'
 import { fetchJobsAtom } from '../../atoms/job'
 import { handleMarkerAtom } from '../../atoms/marker'
@@ -10,8 +10,6 @@ import {
   createMarkers,
   findJobsByBounds,
 } from './helper'
-
-const { kakao } = window
 
 function Maps() {
   const [jobs] = useAtom(fetchJobsAtom)
@@ -25,6 +23,7 @@ function Maps() {
   )
 
   useEffect(() => {
+    const { kakao } = window
     const map = createMap()
     const markers = () =>
       createMarkers(findJobsByBounds(jobs, map.getBounds()), {
@@ -71,18 +70,19 @@ function Maps() {
         ),
       })
     })
-  }, [customOverlay])
+  }, [])
 
   return (
     <div
       id="map"
       className="h-screen w-screen"
+      suppressHydrationWarning={true}
       onClick={(e) => {
         if (e.target.tagName === 'svg') {
           setCustomOverlay(null)
         }
       }}
-    />
+    ></div>
   )
 }
 

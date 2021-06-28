@@ -1,5 +1,3 @@
-import React from 'react'
-
 const WANTED_URL = 'https://www.wanted.co.kr'
 
 function Summary({ company_id, id, name, industry_name, position }) {
@@ -13,7 +11,7 @@ function Summary({ company_id, id, name, industry_name, position }) {
       >
         {name}
       </a>
-      <p className="text-xs text-gray-500">
+      <p className="text-xs text-gray-500 truncate">
         {industry_name} ·{' '}
         <a href={`${WANTED_URL}/wd/${id}`} target="_blank" rel="noreferrer">
           {position}

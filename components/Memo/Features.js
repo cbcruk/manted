@@ -1,4 +1,3 @@
-import React from 'react'
 import { ICONS } from './constants'
 
 function Feature({ icon, label, children }) {
