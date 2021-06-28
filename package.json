@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "flat": "deno run -q --allow-read --allow-write --allow-run --allow-net --allow-env --unstable postprocess.js"
   },
   "dependencies": {
     "autoprefixer": "^10.2.6",
