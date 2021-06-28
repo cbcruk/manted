@@ -3,7 +3,7 @@ name: Flat
 on:
   push:
     branches:
-      - test_gh_actions
+      - test-gh_actions
     paths:
       - .github/workflows/flat.yml
   workflow_dispatch:
