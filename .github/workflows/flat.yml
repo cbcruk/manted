@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - test-gh_actions
+      - test-gh_actions2
     paths:
       - .github/workflows/flat.yml
   workflow_dispatch:
