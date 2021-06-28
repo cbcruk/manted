@@ -27,8 +27,6 @@ jobs:
         run: echo "START_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Fetch data
         uses: githubocto/flat@v3
-        env:
-          COUNTRY: KR
         with:
-          http_url: ${{env.API_URL}}/jobs?country=kr&tag_type_id=669&job_sort=job.latest_order&locations=all&years=-1&limit=${LIMIT}&offset=0
+          http_url: ${{env.API_URL}}/jobs?country=kr&tag_type_id=669&job_sort=job.latest_order&locations=all&years=-1&limit=100&offset=0
           downloaded_filename: raw_data/data.json
