@@ -28,3 +28,4 @@ jobs:
         with:
           http_url: ${{env.API_URL}}/jobs?country=kr&tag_type_id=669&job_sort=job.latest_order&locations=all&years=-1&limit=20&offset=0
           downloaded_filename: raw_data/data.json
+          postprocess: postprocess.js
