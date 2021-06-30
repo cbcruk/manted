@@ -32,7 +32,7 @@ function Overlay() {
       {sortBy(expanded, ['company_id']).map((marker) => (
         <a
           key={marker.id}
-          className="block cursor-pointer"
+          className="flex cursor-pointer"
           style={{
             width: 30,
             height: 30,
