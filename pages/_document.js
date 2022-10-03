@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 
 class MyDocument extends Document {
@@ -16,7 +17,7 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap"
           />
-          <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=341ab1554e15717d7cb41b887719ca53&libraries=clusterer"></script>
+          <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=341ab1554e15717d7cb41b887719ca53&libraries=clusterer" />
         </Head>
         <body>
           <Main />

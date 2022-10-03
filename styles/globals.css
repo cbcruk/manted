@@ -1,12 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+
 body {
   font-family: 'Noto Sans KR', sans-serif;
 }
 
 img[src^="https://static.wanted.co.kr"]:not([class])
 {
+  border: 1px solid rgba(0, 0, 0, 0.25) !important;
   border-radius: 50%;
   background-color: #fff;
-  box-shadow: rgb(0 0 0 / 4%) 0px 0px 0px 1px, rgb(0 0 0 / 8%) 0px 1px 2px;
+  box-shadow: 1px 1px 2px rgb(0 0 0 / 15%);
   object-fit: contain;
   clip: unset !important;
 }

@@ -3,13 +3,14 @@ import { createPortal } from 'react-dom'
 import { useAtom } from 'jotai'
 import sortBy from 'lodash/sortBy'
 import { handleMarkerAtom } from '../../atoms/marker'
+import { DEFAULT_MARKER_SIZE } from '../Maps/constants'
 
 function Overlay() {
   const customOverlayElem = document.getElementById('custom-overlay')
   const [{ expanded }, handleMarker] = useAtom(handleMarkerAtom)
   const squareWidth = useMemo(() => {
     const root = Math.ceil(Math.sqrt(expanded.length))
-    const width = root * 30 + 4 * 2 + root * 4
+    const width = root * DEFAULT_MARKER_SIZE + 4 * 2 + root * 4
 
     return width
   }, [expanded])
@@ -24,7 +25,7 @@ function Overlay() {
 
   return createPortal(
     <div
-      className="-translate-x-2/4 -translate-y-1/4 absolute bg-white flex flex-wrap gap-1 p-1 rounded-3xl shadow-2xl transform border-2 border-dashed"
+      className="-translate-x-2/4 -translate-y-1/4 absolute bg-white flex flex-wrap gap-1 p-1 rounded-3xl shadow-2xl transform border-2"
       style={{
         width: squareWidth,
       }}
@@ -34,8 +35,8 @@ function Overlay() {
           key={marker.id}
           className="flex cursor-pointer"
           style={{
-            width: 30,
-            height: 30,
+            width: DEFAULT_MARKER_SIZE,
+            height: DEFAULT_MARKER_SIZE,
           }}
           onClick={() => {
             handleMarker({

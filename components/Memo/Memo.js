@@ -1,43 +1,41 @@
-import { useAtom } from 'jotai'
-import { markerAtom } from '../../atoms/marker'
+import { Skeleton } from '../Skeleton'
 import Hero from './Hero'
-import Summary from './Summary'
-import Features from './Features'
-import Desc from './Desc'
+import { Category, MemoItem, Position, TagList } from './MemoItem'
+import { useJobs } from './useJobs'
 
 function Memo() {
-  const [{ selected }] = useAtom(markerAtom)
+  const { data, isLoading, fetchStatus } = useJobs()
 
-  if (!selected) {
+  if (fetchStatus === 'idle' && !data) {
     return null
   }
 
-  const {
-    id,
-    company_id,
-    logo_img_thumb,
-    title_img_thumb,
-    name,
-    industry_name,
-    position,
-    avg_day,
-    avg_rate,
-    like_count,
-    main_tasks,
-    requirements,
-  } = selected
-
   return (
-    <div className="max-h-screen fixed inset-0 md:top-0 top-auto md:bottom-auto md:left-auto z-10 p-2">
-      <div className="md:w-72 md:max-h-[calc(100vh-1.5rem)] rounded-md md:overflow-auto overflow-hidden bg-white shadow-md">
-        <div className="flex md:flex-col bg-white">
-          <Hero {...{ id, company_id, logo_img_thumb, title_img_thumb }} />
-          <div className="flex-1 overflow-hidden">
-            <Summary {...{ id, company_id, name, industry_name, position }} />
-            <Features {...{ avg_day, avg_rate, like_count }} />
+    <div className="fixed inset-0 top-auto md:top-12 left-0 md:left-auto z-10 max-h-screen p-2">
+      <div className="overflow-auto w-full w-full md:w-80 max-h-[50vh] md:max-h-[calc(100vh-40px-32px)] rounded-3xl shadow-2xl">
+        {isLoading && <Skeleton />}
+        {data && (
+          <div className="flex flex-col bg-neutral-50">
+            <Hero {...data[0]} />
+            <div className="overflow-hidden flex flex-col gap-2 flex-1 p-4 text-neutral-600 transition-all">
+              {data?.map(
+                ({ id, position, like_count, category_tags, due_time }) => {
+                  return (
+                    <MemoItem key={id}>
+                      <Position {...{ id, position }} />
+                      <div className="mt-1 text-xs">
+                        <div className="overflow-auto flex flex-col gap-1 border-neutral-400">
+                          <TagList {...{ due_time, like_count }} />
+                          <Category {...{ category_tags }} />
+                        </div>
+                      </div>
+                    </MemoItem>
+                  )
+                }
+              )}
+            </div>
           </div>
-        </div>
-        <Desc {...{ main_tasks, requirements }} />
+        )}
       </div>
     </div>
   )

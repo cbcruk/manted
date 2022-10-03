@@ -1,10 +1,12 @@
-async function jobs(_req, res) {
-  const response = await fetch(
-    'https://raw.githubusercontent.com/cbcruk/manted/main/raw_data/data.json'
-  )
-  const data = await response.json()
+import path from 'path'
+import { promises as fs } from 'fs'
 
-  res.json(data)
+async function jobs(req, res) {
+  const id = req.query.companyId
+  const dir = path.join(process.cwd(), '.cached/jobs/byCompanyId')
+  const data = await fs.readFile(dir + `/${id}.json`)
+
+  res.json(JSON.parse(data))
 }
 
 export default jobs

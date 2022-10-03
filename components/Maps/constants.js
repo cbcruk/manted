@@ -1,5 +1,12 @@
 export const DEFAULT_ZOOM_LEVEL = 4
-export const DEFAULT_CENTER = [37.504512, 127.0468183]
+export const DEFAULT_CENTER = [37.5132612, 127.1001336]
+export const DEFAULT_MARKER_SIZE = 35
+export const DEFAULT_MARKER_CLUSTERER_OPTIONS = {
+  averageCenter: true,
+  minLevel: 2,
+  gridSize: 30,
+  disableClickZoom: true,
+}
 
 export const COLOR_SCALE = [
   '#f7fbff',

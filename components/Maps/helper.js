@@ -1,14 +1,21 @@
-import { DEFAULT_CENTER, DEFAULT_ZOOM_LEVEL } from './constants'
+import {
+  DEFAULT_CENTER,
+  DEFAULT_MARKER_CLUSTERER_OPTIONS,
+  DEFAULT_MARKER_SIZE,
+  DEFAULT_ZOOM_LEVEL,
+} from './constants'
 
 export function createMap() {
   const { kakao } = window
-  const mapElem = document.getElementById('map')
-  const map = new kakao.maps.Map(mapElem, {
-    center: new kakao.maps.LatLng(DEFAULT_CENTER[0], DEFAULT_CENTER[1]),
+  const [lat, lng] = DEFAULT_CENTER
+  const map = new kakao.maps.Map(document.getElementById('map'), {
+    center: new kakao.maps.LatLng(lat, lng),
     level: DEFAULT_ZOOM_LEVEL,
   })
 
   map.setMinLevel(2)
+
+  window.kakaoMap = map
 
   return map
 }
@@ -22,7 +29,7 @@ export function createMarkers(items, { onClick }) {
       title: name,
       image: new kakao.maps.MarkerImage(
         logo_img_thumb,
-        new kakao.maps.Size(35, 35)
+        new kakao.maps.Size(DEFAULT_MARKER_SIZE, DEFAULT_MARKER_SIZE)
       ),
     })
     marker.id = item.id
@@ -48,10 +55,7 @@ export function createMarkers(items, { onClick }) {
 export function createMarkerClusterer(markers, options = {}) {
   const { kakao } = window
   const clusterer = new kakao.maps.MarkerClusterer({
-    averageCenter: true,
-    minLevel: 2,
-    gridSize: 30,
-    disableClickZoom: true,
+    ...DEFAULT_MARKER_CLUSTERER_OPTIONS,
     ...options,
   })
 
@@ -65,7 +69,7 @@ export function createMarkerClusterer(markers, options = {}) {
 export function createCustomOverlay() {
   const { kakao } = window
   const customOverlay = new kakao.maps.CustomOverlay({
-    content: '<div id="custom-overlay"></div>',
+    content: '<div id="custom-overlay" />',
   })
 
   return customOverlay
